@@ -1,13 +1,15 @@
-import {BootMixin} from '@loopback/boot';
-import {ApplicationConfig} from '@loopback/core';
+import { BootMixin } from '@loopback/boot';
+import { ApplicationConfig } from '@loopback/core';
 import {
   RestExplorerBindings,
   RestExplorerComponent,
 } from '@loopback/rest-explorer';
-import {RepositoryMixin} from '@loopback/repository';
-import {RestApplication} from '@loopback/rest';
+import { RepositoryMixin } from '@loopback/repository';
+import { RestApplication } from '@loopback/rest';
+import { AuthenticationComponent, AuthenticationBindings } from '@loopback/authentication';
 import * as path from 'path';
-import {MySequence} from './sequence';
+import { MySequence } from './sequence';
+import { MyAuthBindings, MyAuthMetadataProvider, MyAuthActionProvider, MyAuthAuthenticationStrategyProvider } from './auth';
 
 export class RemindApplication extends BootMixin(
   RepositoryMixin(RestApplication),
@@ -27,6 +29,10 @@ export class RemindApplication extends BootMixin(
     });
     this.component(RestExplorerComponent);
 
+    // this.component(AuthenticationComponent);
+    this.bind(AuthenticationBindings.METADATA).toProvider(MyAuthMetadataProvider);
+    this.bind(MyAuthBindings.STRATEGY).toProvider(MyAuthAuthenticationStrategyProvider);
+    this.bind(AuthenticationBindings.AUTH_ACTION).toProvider(MyAuthActionProvider);
     this.projectRoot = __dirname;
     // Customize @loopback/boot Booter Conventions here
     this.bootOptions = {
