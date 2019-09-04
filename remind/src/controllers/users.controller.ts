@@ -1,3 +1,4 @@
+import { UserService } from './../services/user-service.service';
 import { Credentials, JWT_SECRET } from './../auth';
 import {
   Count,
@@ -23,25 +24,24 @@ import { User } from '../models';
 import { UserRepository, UserRoleRepository } from '../repositories';
 import { authenticate } from '@loopback/authentication';
 import { promisify } from 'util';
+import { inject } from '@loopback/core';
 
 const { sign } = require('jsonwebtoken');
 const signAsync = promisify(sign);
 
 export class UsersController {
   constructor(
-    @repository(UserRepository)
-    public userRepository: UserRepository,
-    @repository(UserRoleRepository)
-    public userRoleRepository: UserRoleRepository,
+    @repository(UserRepository) public userRepository: UserRepository,
+    @repository(UserRoleRepository) public userRoleRepository: UserRoleRepository,
+    @inject('../services/user-service.service.ts') public userService: UserService
   ) { }
 
   @post('/users/login')
   async login(@requestBody() credentials: Credentials) {
-    const user = await this.userRepository.findOne({ where: { uid: credentials.username } });
-    if (!user) throw new HttpErrors.Unauthorized('Invalid credentials');
-
-    const isPasswordMatched = user.password === credentials.password;
-    if (!isPasswordMatched) throw new HttpErrors.Unauthorized('Invalid credentials');
+    const user = await this.userService.verifyCredentials(credentials);
+    if (user === null) {
+      throw new HttpErrors.Unauthorized('Invalid credentials');
+    }
     
     const tokenObject = { username: credentials.username };
     const token = await signAsync(tokenObject, JWT_SECRET);
