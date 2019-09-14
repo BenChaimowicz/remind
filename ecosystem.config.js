@@ -1,6 +1,6 @@
 module.exports = {
   apps : [{
-    name: 'API',
+    name: 'Remind API',
     script: './remind/index.js',
 
     // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
