@@ -1,18 +1,28 @@
+import { Controller } from './interfaces/controller.interface';
+import bodyParser from 'body-parser';
 import express from 'express';
+import { loggerMiddleware } from './middleware/logger.middleware';
 
 export class App {
-    public app: express.Application = express();
-    public port: number = 3000;
+    public app: express.Application;
+    public port: number;
 
-    constructor() {
+    constructor(controllers: Controller[], port: number) {
+        this.app = express();
+        this.port = port;
 
+        this.initializeMiddlwares();
+        this.initializeControllers(controllers);
     }
 
-    applyMiddleware(middleware: any[]) {
-        
+    private initializeMiddlwares() {
+        this.app.use(bodyParser.json());
+        this.app.use(loggerMiddleware);
     }
 
-    applyControllers(controllers: any[]) {
-        
+    private initializeControllers(controllers: Controller[]) {
+        controllers.forEach((controller) => {
+            this.app.use('/', controller.router);
+        })
     }
 }
