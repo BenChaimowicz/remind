@@ -1,6 +1,8 @@
-export interface User {
-    id?: number;
+export class User {
+    id: number;
     userName: string;
-    password: string | null;
+    password: string;
     email: string;
+    dateOfBirth: string;    
+    dateCreated: string;
 }

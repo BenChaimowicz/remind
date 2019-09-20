@@ -2,6 +2,7 @@ import { Controller } from './interfaces/controller.interface';
 import bodyParser from 'body-parser';
 import express from 'express';
 import { loggerMiddleware } from './middleware/logger.middleware';
+import { errorMiddlware } from './middleware/error-handler.middleware';
 
 export class App {
     public app: express.Application;
@@ -15,9 +16,19 @@ export class App {
         this.initializeControllers(controllers);
     }
 
+    public listen() {
+        this.app.listen(this.port, () => {
+            console.log(`Server running on http://localhost:${this.port}`);
+        });
+    }
+
     private initializeMiddlwares() {
         this.app.use(bodyParser.json());
         this.app.use(loggerMiddleware);
+    }
+
+    private initializeErrorHandlers() {
+        this.app.use(errorMiddlware);
     }
 
     private initializeControllers(controllers: Controller[]) {
