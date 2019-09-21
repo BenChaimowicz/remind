@@ -1,4 +1,6 @@
 import { ConnectionOptions } from 'typeorm';
+import 'reflect-metadata';
+import { User} from '../models/user.model';
 
 export const config: ConnectionOptions = {
     type: 'postgres',
@@ -8,7 +10,7 @@ export const config: ConnectionOptions = {
     password: 'admin123',
     database: 'reminddb',
     entities: [
-        __dirname + '/remind-server/src/models/*.model{.ts,.js}',
+        User
     ],
     synchronize: true,
 };

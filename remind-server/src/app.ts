@@ -14,6 +14,7 @@ export class App {
 
         this.initializeMiddlwares();
         this.initializeControllers(controllers);
+        this.initializeErrorHandlers();
     }
 
     public listen() {

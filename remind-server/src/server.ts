@@ -6,6 +6,7 @@ import bodyParser from 'body-parser';
 import { UserController } from './controllers/users.controller';
 import { createConnection } from 'typeorm';
 import { config } from './config/dbconfig';
+import 'reflect-metadata';
 
 (async () => {
     try {
