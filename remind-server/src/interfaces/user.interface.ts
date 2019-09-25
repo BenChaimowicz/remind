@@ -7,7 +7,7 @@ export class User {
     userName: string;
     password: string;
     email: string;
-    datesId: number;    
+    dateOfBirth: moment.Moment;
 }
 
 export class UserDto {

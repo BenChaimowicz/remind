@@ -16,3 +16,15 @@ export const errorMiddlware = (error: HttpError, req: Request, res: Response, ne
     const message = error.message || 'Something went wrong';
     res.status(status).send({ status, message });
 }
+
+export class WrongCredentialsError extends HttpError {
+    constructor() {
+        super(401, 'The email and password entered do not match!');
+    }
+}
+
+export class EmailAlreadyExists extends HttpError {
+    constructor(email: string) {
+        super(409, `${email} is already registered!`);
+    }
+}
