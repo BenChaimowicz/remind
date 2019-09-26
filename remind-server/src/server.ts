@@ -7,6 +7,7 @@ import { UserController } from './controllers/users.controller';
 import { createConnection } from 'typeorm';
 import { config } from './config/dbconfig';
 import 'reflect-metadata';
+import { AuthController } from './controllers/auth.controller';
 
 (async () => {
     try {
@@ -17,6 +18,7 @@ import 'reflect-metadata';
     }
     const app: App = new App([
         new UserController(),
+        new AuthController(),
     ], 3000);
     
     app.listen();

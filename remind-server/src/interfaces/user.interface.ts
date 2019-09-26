@@ -1,4 +1,4 @@
-import { IsString, IsEmail, Length } from 'class-validator';
+import { IsString, IsEmail, Length, IsDateString } from 'class-validator';
 import * as moment from 'moment';
 import { isMomentDate } from '../validators/moment.validator';
 
@@ -21,6 +21,6 @@ export class UserDto {
     @IsEmail()
     public email: string;
 
-    @isMomentDate()
-    public dateOfBirth: moment.Moment;
+    @IsString()
+    public dateOfBirth: string;
 }

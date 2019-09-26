@@ -17,7 +17,7 @@ export class AuthController implements Controller {
     private user: User;
 
     constructor() {
-        
+        this.initializeRoutes();
     }
 
     private initializeRoutes() {
@@ -37,8 +37,8 @@ export class AuthController implements Controller {
                 userName: userData.userName,
                 password: hashedPassword,
                 email: userData.email,
-                dateCreated: moment().toString(),
-                dateOfBirth: userData.dateOfBirth.toString()
+                dateCreated: moment().format('YYYY-MM-DD hh:mm:ss').toString(),
+                dateOfBirth: moment(userData.dateOfBirth, 'YYYY-MM-DD').format('YYYY-MM-DD').toString()
             };
             const newUser = this.userRepository.create(userCreation);
             await this.userRepository.save(newUser);
