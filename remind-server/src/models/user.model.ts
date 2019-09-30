@@ -20,7 +20,4 @@ export class User {
     
     @Column()
     dateCreated: string;
-
-    @OneToMany(type => Role, role => role.user)
-    roles: Role[];
 }

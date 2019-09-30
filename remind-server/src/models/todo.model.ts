@@ -1,11 +1,14 @@
-import { User } from './user.model';
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { User } from './user.model';
 
 @Entity()
-export class Role {
+export class ToDo {
     @PrimaryGeneratedColumn()
-    id?: number;
+    id: number;
+
+    @Column()
+    todo: string;
 
     @ManyToOne(type => User, user => user.id)
-    userId: number;
+    createdBy: number;
 }
