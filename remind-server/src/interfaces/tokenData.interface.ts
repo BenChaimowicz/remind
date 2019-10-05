@@ -1,6 +1,8 @@
 
 export interface TokenItem {
     expiry: number;
+    userName?: string;
+    email?: string;
     token: Object;
 }
 

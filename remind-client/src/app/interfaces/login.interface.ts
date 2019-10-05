@@ -5,5 +5,7 @@ export interface Login {
 }
 
 export interface Token {
+  email: string;
+  userName: string;
   token: string;
 }

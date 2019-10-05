@@ -72,10 +72,11 @@ export class AuthController implements Controller {
         const secret: string = env.get('JWT_SECRET').required().asString();
         const data: TokenData = {
             userId: user.id,
-            email: user.email
+            email: user.email,
         };
         const token: TokenItem = {
             expiry: this.tokenExpiry,
+            userName: user.userName,
             token: jwt.sign(data, secret, { expiresIn: this.tokenExpiry })
         }
         return token;
