@@ -8,8 +8,8 @@
       <div class="row col-12">
         <form class="col-6" [formGroup]="regForm">
           <div class="form-group">
-            <label for="emailInput">Your Email:</label>
-            <input id="emailInput" type="text" class="form-control" formControlName="emailInput"
+            <label for="eInput">Your Email:</label>
+            <input id="eInput" type="text" class="form-control" formControlName="emailInput"
               placeholder="remind@me.com">
           </div>
           <div class="form-group">
@@ -21,7 +21,8 @@
             <label for="birthdayInput">Your birth date:</label>
             <div class="input-group">
               <input id="birthdayInput" class="form-control" formControlName="birthdayInput" ngbDatepicker
-                #dp="ngbDatepicker" [positionTarget]="calButton">
+                #dp="ngbDatepicker" [positionTarget]="calButton" [maxDate]="calendar.getToday()"
+                [minDate]="{year: 1920, month: 1, day: 1}">
               <div class="input-group-append">
                 <button #calButton class="btn btn-primary" (click)="dp.toggle()">
                   <fa-icon icon="calendar-alt"></fa-icon>
@@ -31,18 +32,18 @@
           </div>
           <div class="card px-3 py-3" formGroupName="passwords">
             <div class="form-group">
-              <label for="passwordInput">Your password:</label>
-              <input id="passwordInput" type="password" class="form-control" formControlName="passwordInput">
+              <label for="pdInput">Your password:</label>
+              <input id="pInput" type="password" class="form-control" formControlName="passwordInput">
             </div>
             <div class="form-group">
-              <label for="passwordVerify">Verify password:</label>
-              <input id="passwordVerify" type="password" class="form-control" formControlName="passwordVerify">
+              <label for="pVerify">Verify password:</label>
+              <input id="pVerify" type="password" class="form-control" formControlName="passwordVerify">
             </div>
           </div>
-          <button class="btn btn-primary" (click)="register()">Sign up</button>
+          <button class="btn btn-primary mt-3" (click)="register()">Sign up</button>
         </form>
-        <div class="col-6 card">
-          kaki
+        <div class="col-6 card py-3 px-3">
+          {{disclaimer}}
         </div>
       </div>
     </div>

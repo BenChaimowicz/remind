@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
 // ngBootstrap
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
 // FontAwesome
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
@@ -19,6 +19,9 @@ import { MyfriendsComponent } from './components/myfriends/myfriends.component';
 import { MylistComponent } from './components/mylist/mylist.component';
 import { MyscoreComponent } from './components/myscore/myscore.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+
+// Adapters
+import { NgbMomentjsAdapter } from './adapters/ngb-moment.adapter';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,7 @@ import { RegistrationComponent } from './components/registration/registration.co
     NgbModule,
     FontAwesomeModule,
   ],
-  providers: [],
+  providers: [{ provide: NgbDateAdapter, useClass: NgbMomentjsAdapter }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
