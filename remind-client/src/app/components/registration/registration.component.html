@@ -22,7 +22,7 @@
             <div class="input-group">
               <input id="birthdayInput" class="form-control" formControlName="birthdayInput" ngbDatepicker
                 #dp="ngbDatepicker" [positionTarget]="calButton" [maxDate]="calendar.getToday()"
-                [minDate]="{year: 1920, month: 1, day: 1}">
+                [minDate]="{year: 1920, month: 1, day: 1}" autocomplete="off">
               <div class="input-group-append">
                 <button #calButton class="btn btn-primary" (click)="dp.toggle()">
                   <fa-icon icon="calendar-alt"></fa-icon>
