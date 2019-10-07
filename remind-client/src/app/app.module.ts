@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 // ngBootstrap
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -14,7 +15,7 @@ import { LoginComponent } from './components/login/login.component';
 import { MyfriendsComponent } from './components/myfriends/myfriends.component';
 import { MylistComponent } from './components/mylist/mylist.component';
 import { MyscoreComponent } from './components/myscore/myscore.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { RegistrationComponent } from './components/registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     NavigationComponent,
     MyfriendsComponent,
     MylistComponent,
-    MyscoreComponent
+    MyscoreComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
