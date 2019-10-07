@@ -26,4 +26,7 @@ export class RegistrationComponent implements OnInit {
   ngOnInit() {
   }
 
+  public async register() {
+
+  }
 }

@@ -3,10 +3,10 @@
     <div class="card-body">
       <div class="text-center">
         <h1 class="card-title">Register a new Remind account</h1>
-        <h6 class="card-subtitle text-muted mb-4">Please fill out the form and press "Register"</h6>
+        <h6 class="card-subtitle text-muted mb-4">Please fill out the form and press "Sign up"</h6>
       </div>
-      <div class="px-4">
-        <form class="w-50" [formGroup]="regForm">
+      <div class="row col-12">
+        <form class="col-6" [formGroup]="regForm">
           <div class="form-group">
             <label for="emailInput">Your Email:</label>
             <input id="emailInput" type="text" class="form-control" formControlName="emailInput"
@@ -39,7 +39,11 @@
               <input id="passwordVerify" type="password" class="form-control" formControlName="passwordVerify">
             </div>
           </div>
+          <button class="btn btn-primary" (click)="register()">Sign up</button>
         </form>
+        <div class="col-6 card">
+          kaki
+        </div>
       </div>
     </div>
   </div>
