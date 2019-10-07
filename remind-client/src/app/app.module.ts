@@ -8,6 +8,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 // ngBootstrap
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+// FontAwesome
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 
 // Components
 import { NavigationComponent } from './components/navigation/navigation.component';
@@ -30,11 +33,16 @@ import { RegistrationComponent } from './components/registration/registration.co
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule,
-    HttpClientModule,
     ReactiveFormsModule,
+    HttpClientModule,
+    NgbModule,
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(public library: FaIconLibrary) {
+    library.addIcons(faCalendarAlt);
+  }
+}
