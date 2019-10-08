@@ -39,4 +39,8 @@ export class LoginComponent implements OnInit {
     const login = await this.loginService.loginUser(loginObj);
     if (typeof login === 'string') { this.errorMessage = login; }
   }
+
+  public logout() {
+    this.loginService.logout();
+  }
 }

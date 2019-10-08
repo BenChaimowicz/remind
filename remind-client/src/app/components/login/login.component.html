@@ -31,14 +31,14 @@
   </div>
 
   <!-- If user logged in -->
-  <div class="btn-group" *ngIf="currentUser">
+  <div class="btn-group" *ngIf="currentUser" ngbDropdown>
     <button class="btn btn-secondary shadow-none">
       <img src="../../../assets/default_profile.png" alt="" class="rounded-circle profileImg">
     </button>
-    <button class="btn btn-secondary btn-lg dropdown-toggle dropdown-toggle-split shadow-none"
-      data-toggle="dropdown"></button>
-    <div class="dropdown-menu">
-      <button class="dropdown-item">Log out</button>
+    <button class="btn btn-secondary btn-lg dropdown-toggle dropdown-toggle-split shadow-none" data-toggle="dropdown"
+      ngbDropdownToggle></button>
+    <div class="dropdown-menu" ngbDropdownMenu>
+      <button class="dropdown-item" (click)="logout()">Log out</button>
     </div>
   </div>
 </div>
