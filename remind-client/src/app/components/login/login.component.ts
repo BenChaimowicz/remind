@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
     passwordInput: new FormControl('', [Validators.required]),
     rememberInput: new FormControl(true, [])
   });
+  public errorMessage: string;
 
   constructor(private loginService: LoginService) {
     this.loginService.currentUser.subscribe(user => {
@@ -29,13 +30,13 @@ export class LoginComponent implements OnInit {
   }
 
   public async login() {
-    console.log('sad');
+    this.errorMessage = undefined;
     const loginObj: Login = {
       email: this.loginForm.controls.emailInput.value,
       password: this.loginForm.controls.passwordInput.value,
       remember: this.loginForm.controls.rememberInput.value
     };
-    console.log(loginObj);
     const login = await this.loginService.loginUser(loginObj);
+    if (typeof login === 'string') { this.errorMessage = login; }
   }
 }

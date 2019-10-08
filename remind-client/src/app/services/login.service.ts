@@ -19,8 +19,8 @@ export class LoginService {
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  public async loginUser(login: Login): Promise<boolean> {
-    if (!login) { return false; }
+  public async loginUser(login: Login): Promise<boolean | string> {
+    if (!login) { return 'Nothing was typed'; }
     try {
       const token: Token = await this.http.post<Token>(`${this.baseURL}/login`, login).toPromise();
       console.log(token);
@@ -33,8 +33,7 @@ export class LoginService {
         return false;
       }
     } catch (err) {
-      console.error(err);
-      return false;
+      return 'Wrong credentials';
     }
   }
 
