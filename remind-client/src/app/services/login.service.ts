@@ -17,7 +17,6 @@ export class LoginService {
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(this.getUser());
     this.currentUser = this.currentUserSubject.asObservable();
-    console.log(this.currentUserSubject.value);
   }
 
   public async loginUser(login: Login): Promise<boolean | string> {
