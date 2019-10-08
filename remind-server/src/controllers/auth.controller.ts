@@ -77,6 +77,7 @@ export class AuthController implements Controller {
         const token: TokenItem = {
             expiry: this.tokenExpiry,
             userName: user.userName,
+            email: user.email,
             token: jwt.sign(data, secret, { expiresIn: this.tokenExpiry })
         }
         return token;

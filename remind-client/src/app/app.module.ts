@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 // ngBootstrap
 import { NgbModule, NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
+
 // FontAwesome
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';

@@ -17,13 +17,13 @@ export class LoginService {
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(this.getUser());
     this.currentUser = this.currentUserSubject.asObservable();
+    console.log(this.currentUserSubject.value);
   }
 
   public async loginUser(login: Login): Promise<boolean | string> {
     if (!login) { return 'Nothing was typed'; }
     try {
       const token: Token = await this.http.post<Token>(`${this.baseURL}/login`, login).toPromise();
-      console.log(token);
       if (token) {
         this.currentUserSubject.next({ email: token.email, userName: token.userName });
         if (login.remember) { this.setUser(token); }
@@ -43,12 +43,13 @@ export class LoginService {
   }
   private setUser(token: Token) {
     localStorage.setItem('token', JSON.stringify(token.token));
+    localStorage.setItem('user', JSON.stringify({ userName: token.userName, email: token.email }));
   }
 
   private getUser() {
-    const token = localStorage.getItem('token');
-    if (token !== null) {
-      return JSON.parse(token);
+    const user = localStorage.getItem('user');
+    if (user !== null) {
+      return JSON.parse(user);
     } else {
       return null;
     }
