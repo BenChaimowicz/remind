@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit {
   }
 
   public logout() {
+    this.toastr.success(`Goodbye ${this.currentUser.userName}!`);
     this.loginService.logout();
   }
 
