@@ -9,20 +9,22 @@
         <form class="col-6" [formGroup]="regForm">
           <div class="form-group">
             <label for="eInput">Your Email:</label>
-            <input id="eInput" type="text" class="form-control" formControlName="emailInput"
-              placeholder="remind@me.com">
+            <input id="eInput" type="text" class="form-control" formControlName="emailInput" placeholder="remind@me.com"
+              [ngClass]="{'is-invalid': regForm.controls.emailInput.errors && regForm.controls.emailInput.touched}">
           </div>
           <div class="form-group">
             <label for="userNameInput">Your User Name</label>
             <input id="userNameInput" type="text" class="form-control" formControlName="userNameInput"
-              placeholder="Remind User">
+              placeholder="Remind User"
+              [ngClass]="{'is-invalid': regForm.controls.userNameInput.errors && regForm.controls.userNameInput.touched}">
           </div>
           <div class="form-group">
             <label for="birthdayInput">Your birth date:</label>
             <div class="input-group">
               <input id="birthdayInput" class="form-control" formControlName="birthdayInput" ngbDatepicker
                 #dp="ngbDatepicker" [positionTarget]="calButton" [maxDate]="calendar.getToday()"
-                [minDate]="{year: 1920, month: 1, day: 1}" autocomplete="off">
+                [minDate]="{year: 1920, month: 1, day: 1}" autocomplete="off"
+                [ngClass]="{'is-invalid': regForm.controls.birthdayInput.errors && regForm.controls.birthdayInput.touched}">
               <div class="input-group-append">
                 <button #calButton class="btn btn-primary" (click)="dp.toggle()">
                   <fa-icon icon="calendar-alt"></fa-icon>
@@ -37,10 +39,11 @@
             </div>
             <div class="form-group">
               <label for="pVerify">Verify password:</label>
-              <input id="pVerify" type="password" class="form-control" formControlName="passwordVerify">
+              <input id="pVerify" type="password" class="form-control" formControlName="passwordVerify"
+                [ngClass]="{'is-invalid': regForm.controls.passwords.errors && regForm.controls.passwords.controls.passwordVerify.touched}">
             </div>
           </div>
-          <button class="btn btn-primary mt-3" (click)="register()">Sign up</button>
+          <button class="btn btn-primary mt-3" (click)="register()" [disabled]="!regForm.valid">Sign up</button>
         </form>
         <div class="col-6 card py-3 px-3">
           {{disclaimer}}
