@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../services/login.service';
 import { User } from 'src/app/interfaces/user.interface';
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
   });
   public errorMessage: string;
 
-  constructor(private loginService: LoginService) {
+  constructor(private loginService: LoginService, private toastr: ToastrService) {
     this.loginService.currentUser.subscribe(user => {
       this.currentUser = user;
     });
@@ -37,10 +38,19 @@ export class LoginComponent implements OnInit {
       remember: this.loginForm.controls.rememberInput.value
     };
     const login = await this.loginService.loginUser(loginObj);
-    if (typeof login === 'string') { this.errorMessage = login; }
+    if (typeof login === 'string') {
+      this.errorMessage = login;
+      this.toastr.error(this.errorMessage);
+    } else {
+      this.toastr.success(`Welcome ${this.currentUser.userName}!`);
+    }
   }
 
   public logout() {
     this.loginService.logout();
+  }
+
+  public showToast() {
+    this.toastr.success('toast');
   }
 }

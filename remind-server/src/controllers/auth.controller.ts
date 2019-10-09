@@ -8,7 +8,7 @@ import { validationMiddleware } from '../middleware/validation.middleware';
 import bcrypt from 'bcrypt';
 import moment from 'moment';
 import * as jwt from 'jsonwebtoken';
-import { EmailAlreadyExists, WrongCredentialsError } from '../middleware/error-handler.middleware';
+import { EmailAlreadyExists, WrongCredentialsError, DatabaseError } from '../middleware/error-handler.middleware';
 import { TokenData, TokenItem } from '../interfaces/tokenData.interface';
 import { config } from 'dotenv';
 import * as env from 'env-var';
@@ -33,7 +33,7 @@ export class AuthController implements Controller {
     private registration = async (req: Request, res: Response, next: NextFunction) => {
         const userData: UserDto = req.body;
 
-        if (await this.userRepository.findOne({ email: userData.email })) {
+        if (this.checkIfEmailExists(userData.email)) {
             next(new EmailAlreadyExists(userData.email));
         } else {
             const hashedPassword = await bcrypt.hash(userData.password, 10);
@@ -45,10 +45,16 @@ export class AuthController implements Controller {
                 dateCreated: moment().format('YYYY-MM-DD hh:mm:ss').toString(),
                 dateOfBirth: moment(userData.dateOfBirth, 'YYYY-MM-DD').format('YYYY-MM-DD').toString(),
             };
-            const newUser = this.userRepository.create(userCreation);
-            await this.userRepository.save(newUser);
+            try {
+                const newUser = this.userRepository.create(userCreation);
+                await this.userRepository.save(newUser);
 
-            res.send({ id: newUser.id, userName: newUser.userName, email: newUser.email });
+                res.send({ id: newUser.id, userName: newUser.userName, email: newUser.email });
+            } catch (err) {
+                console.error(err);
+                next(new DatabaseError());
+            }
+
         }
     }
 
@@ -81,5 +87,10 @@ export class AuthController implements Controller {
             token: jwt.sign(data, secret, { expiresIn: this.tokenExpiry })
         }
         return token;
+    }
+
+    private async checkIfEmailExists(email: string) {
+        const exists = await this.userRepository.findOne({ email: email });
+        if (exists) { return true } else { return false };
     }
 }

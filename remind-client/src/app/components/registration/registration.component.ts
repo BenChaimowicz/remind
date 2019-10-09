@@ -5,6 +5,8 @@ import { NgbCalendar, NgbDate, NgbDateStruct, NgbDateParserFormatter } from '@ng
 import * as moment from 'moment';
 import { RegistrationValidators } from 'src/app/validators/registration.validator';
 import { NgbDateCustomParserFormatter } from '../../adapters/dateformat.adapter';
+import { User } from 'src/app/interfaces/user.interface';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-registration',
@@ -29,12 +31,30 @@ export class RegistrationComponent implements OnInit {
     birthdayInput: new FormControl(moment(), [Validators.required])
   });
 
-  constructor(private loginService: LoginService, public calendar: NgbCalendar) {
+  constructor(private loginService: LoginService, public calendar: NgbCalendar, private toastr: ToastrService) {
+
   }
 
   ngOnInit() {
   }
 
   public async register() {
+    const user: User = this.createUser();
+    const register = await this.loginService.registerUser(user);
+    if (typeof register !== 'string') {
+      this.toastr.success(`Successfuly registered ${user.userName}! You can now log in!`);
+    } else {
+      this.toastr.error(`Failed to register ${user.userName}. Please contact tech support.`);
+    }
+  }
+
+  private createUser(): User {
+    const user: User = {
+      email: this.regForm.controls.emailInput.value,
+      userName: this.regForm.controls.userNameInput.value,
+      dateOfBirth: this.regForm.controls.birthdayInput.value,
+      password: this.regForm.get('passwords.passwordInput').value
+    };
+    return user;
   }
 }

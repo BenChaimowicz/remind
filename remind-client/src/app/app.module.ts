@@ -5,6 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+// ngxToastr
+import { ToastrModule } from 'ngx-toastr';
 
 // ngBootstrap
 import { NgbModule, NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
@@ -36,11 +40,13 @@ import { NgbMomentjsAdapter } from './adapters/ngb-moment.adapter';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
     FontAwesomeModule,
+    ToastrModule.forRoot({ positionClass: 'toast-top-center' }),
   ],
   providers: [{ provide: NgbDateAdapter, useClass: NgbMomentjsAdapter }],
   bootstrap: [AppComponent]

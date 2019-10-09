@@ -19,6 +19,16 @@ export class LoginService {
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
+  public async registerUser(user: User) {
+    try {
+      const result = await this.http.post(`${this.baseURL}/register`, user).toPromise();
+      return result;
+    } catch (err) {
+      console.error(err);
+      return 'Could not register at this time.';
+    }
+  }
+
   public async loginUser(login: Login): Promise<boolean | string> {
     if (!login) { return 'Nothing was typed'; }
     try {

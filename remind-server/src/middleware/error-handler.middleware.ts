@@ -28,3 +28,9 @@ export class EmailAlreadyExists extends HttpError {
         super(409, `${email} is already registered!`);
     }
 }
+
+export class DatabaseError extends HttpError {
+    constructor() {
+        super(500, 'Could not create database entry.');
+    }
+}
