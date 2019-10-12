@@ -1,0 +1,7 @@
+<div class="card">
+  <ul class="list-group" cdkDropList [cdkDropListData]="remindList.reminds" (cdkDropListDropped)="onDrop($event)">
+    <li class="list-group-item" *ngFor="let remind of remindList.reminds" cdkDrag>
+      {{remind.name}}
+    </li>
+  </ul>
+</div>

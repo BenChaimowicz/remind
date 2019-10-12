@@ -7,6 +7,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+// Angular Material Modules
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
 // ngxToastr
 import { ToastrModule } from 'ngx-toastr';
 
@@ -27,6 +30,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 
 // Adapters
 import { NgbMomentjsAdapter } from './adapters/ngb-moment.adapter';
+import { DragdroplistComponent } from './components/dragdroplist/dragdroplist.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +40,8 @@ import { NgbMomentjsAdapter } from './adapters/ngb-moment.adapter';
     MyfriendsComponent,
     MylistComponent,
     MyscoreComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    DragdroplistComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +52,7 @@ import { NgbMomentjsAdapter } from './adapters/ngb-moment.adapter';
     NgbModule,
     FontAwesomeModule,
     ToastrModule.forRoot({ positionClass: 'toast-top-center' }),
+    DragDropModule,
   ],
   providers: [{ provide: NgbDateAdapter, useClass: NgbMomentjsAdapter }],
   bootstrap: [AppComponent]
