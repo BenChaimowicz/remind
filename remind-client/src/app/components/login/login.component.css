@@ -4,3 +4,9 @@
 .profileImgContainer {
   background: primary;
 }
+
+.userName {
+  text-transform: capitalize;
+  text-align: center;
+  color: white;
+}
