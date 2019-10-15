@@ -3,7 +3,7 @@ import { User } from './user.interface';
 export interface Remind {
   id?: number;
   name: string;
-  reward: number;
+  reward?: number;
   createdBy?: User;
 }
 

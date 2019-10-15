@@ -1,0 +1,9 @@
+<div class="card">
+  <ul class="list-group" cdkDropList [cdkDropListData]="remindStash" (cdkDropListDropped)="onDrop($event)">
+    <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let remind of remindStash"
+      cdkDrag>
+      {{remind?.name}}
+      <span class="badge badge-citrus">{{remind?.reward}}</span>
+    </li>
+  </ul>
+</div>

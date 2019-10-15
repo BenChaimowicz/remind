@@ -8,7 +8,7 @@ import { RemindList, Remind } from '../interfaces/remind.interface';
 export class ListsServiceService {
 
   private readonly BASEURL = `http://localhost:3000/lists`;
-
+  private readonly emptyRemind: Remind = { id: 0, name: 'Empty', reward: 0 };
 
   mocklist: RemindList = {
     id: 1,
@@ -23,7 +23,9 @@ export class ListsServiceService {
   lists: RemindList[] = [this.mocklist];
 
   constructor(private http: HttpClient) {
-
+    for (let i = 4; i < 12; i++) {
+      this.mocklist.reminds.push(this.emptyRemind);
+    }
   }
 
   public async getRemindLists(): Promise<RemindList[]> {
@@ -33,14 +35,10 @@ export class ListsServiceService {
   public async newList(name: string): Promise<RemindList> {
     const newArray: Remind[] = [];
     for (let i = 0; i < 12; i++) {
-      newArray.push({
-        id: i,
-        name: `remind${i}`,
-        reward: 0
-      });
+      newArray.push(this.emptyRemind);
     }
     const newList: RemindList = {
-      id: 2,
+      id: 0,
       name,
       reminds: newArray
     };

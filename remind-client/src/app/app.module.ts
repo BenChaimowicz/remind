@@ -27,10 +27,11 @@ import { MyfriendsComponent } from './components/myfriends/myfriends.component';
 import { MylistComponent } from './components/mylist/mylist.component';
 import { MyscoreComponent } from './components/myscore/myscore.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { DragdroplistComponent } from './components/dragdroplist/dragdroplist.component';
+import { RemindStashComponent } from './components/remind-stash/remind-stash.component';
 
 // Adapters
 import { NgbMomentjsAdapter } from './adapters/ngb-moment.adapter';
-import { DragdroplistComponent } from './components/dragdroplist/dragdroplist.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { DragdroplistComponent } from './components/dragdroplist/dragdroplist.co
     MylistComponent,
     MyscoreComponent,
     RegistrationComponent,
-    DragdroplistComponent
+    DragdroplistComponent,
+    RemindStashComponent
   ],
   imports: [
     BrowserModule,
