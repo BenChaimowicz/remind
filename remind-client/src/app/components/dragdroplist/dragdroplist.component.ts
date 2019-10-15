@@ -13,14 +13,9 @@ export class DragdroplistComponent implements OnInit {
   @Input() remindList: RemindList;
 
   constructor(private listService: ListsServiceService) {
-    this.getLists();
   }
 
   ngOnInit() {
-  }
-
-  private async getLists() {
-    this.remindList = await this.listService.getRemindLists();
   }
 
   public onDrop(drop: CdkDragDrop<Remind>) {

@@ -1,10 +1,14 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { RemindList } from '../interfaces/remind.interface';
+import { RemindList, Remind } from '../interfaces/remind.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ListsServiceService {
+
+  private readonly BASEURL = `http://localhost:3000/lists`;
+
 
   mocklist: RemindList = {
     id: 1,
@@ -16,12 +20,31 @@ export class ListsServiceService {
       { id: 4, name: 'remind4', reward: 10 },
     ]
   };
+  lists: RemindList[] = [this.mocklist];
 
-  constructor() {
+  constructor(private http: HttpClient) {
 
   }
 
-  public async getRemindLists() {
-    return this.mocklist;
+  public async getRemindLists(): Promise<RemindList[]> {
+    return this.lists;
+  }
+
+  public async newList(name: string): Promise<RemindList> {
+    const newArray: Remind[] = [];
+    for (let i = 0; i < 12; i++) {
+      newArray.push({
+        id: i,
+        name: `remind${i}`,
+        reward: 0
+      });
+    }
+    const newList: RemindList = {
+      id: 2,
+      name,
+      reminds: newArray
+    };
+    this.lists.push(newList);
+    return newList;
   }
 }
