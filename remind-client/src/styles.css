@@ -1,4 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.badge-citrus {
+  background-color: #e3b505;
+  line-height: 1.5 !important;
+  border-radius: 50% !important;
+}
+
+.morning {
+  background-color: #db504a;
+}
+
+.day {
+  background-color: #56a3a6;
+}
+
+.evening {
+  background-color: #4f6d7a;
+}
