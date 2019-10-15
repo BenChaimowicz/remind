@@ -1,7 +1,7 @@
 <div class="fluid-container px-3 py-3 my-3">
   <div class="col-4 mb-3 d-flex">
     <button class="btn btn-primary" (click)="toggleShowInput()">New list</button>
-    <div class="ml-2" *ngIf="showInput" @throwIn>
+    <div class="ml-2 expanding" *ngIf="showInput" @throwIn>
       <input type="text" class="form-control" placeholder="New List's name">
     </div>
   </div>

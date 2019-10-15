@@ -7,12 +7,8 @@ import { trigger, state, transition, style, animate } from '@angular/animations'
   styleUrls: ['./mylist.component.css'],
   animations: [
     trigger('throwIn', [
-      transition('void => *', [
-        style({ transform: 'translateX(-10%)', width: '0' }),
-        animate('500ms ease')]),
-      transition('* => void', [
-        style({ opacity: 0 }),
-        animate('200ms ease')])
+      state('void', style({ width: 0, flexGrow: 0 })),
+      transition('void <=> *', [animate(750)])
     ])
   ]
 })
