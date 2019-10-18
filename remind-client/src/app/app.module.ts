@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -30,8 +30,9 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { DragdroplistComponent } from './components/dragdroplist/dragdroplist.component';
 import { RemindStashComponent } from './components/remind-stash/remind-stash.component';
 
-// Adapters
+// Adapters & Middleware
 import { NgbMomentjsAdapter } from './adapters/ngb-moment.adapter';
+import { JwtInterceptor } from './middleware/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,9 @@ import { NgbMomentjsAdapter } from './adapters/ngb-moment.adapter';
     ToastrModule.forRoot({ positionClass: 'toast-top-center' }),
     DragDropModule,
   ],
-  providers: [{ provide: NgbDateAdapter, useClass: NgbMomentjsAdapter }],
+  providers: [
+    { provide: NgbDateAdapter, useClass: NgbMomentjsAdapter },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,6 +1,5 @@
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { trigger, state, transition, style, animate } from '@angular/animations';
 import { ListsServiceService } from 'src/app/services/lists-service.service';
 import { RemindList } from 'src/app/interfaces/remind.interface';
 import { expandToSide } from 'src/app/animations';

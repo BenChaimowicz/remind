@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../interfaces/user.interface';
 import { Login, Token } from '../interfaces/login.interface';
@@ -13,6 +13,7 @@ export class LoginService {
   private readonly baseURL = `http://localhost:3000/auth`;
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
+  public notLoggedIn: EventEmitter<any> = new EventEmitter();
 
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(this.getUser());
@@ -48,6 +49,7 @@ export class LoginService {
 
   public logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     this.currentUserSubject.next(null);
   }
   private setUser(token: Token) {
@@ -62,5 +64,9 @@ export class LoginService {
     } else {
       return null;
     }
+  }
+
+  public get getCurrentUser(): User {
+    return this.currentUserSubject.value;
   }
 }

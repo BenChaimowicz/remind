@@ -20,10 +20,15 @@ export class LoginComponent implements OnInit {
     rememberInput: new FormControl(true, [])
   });
   public errorMessage: string;
+  public shouldLogin = false;
 
   constructor(private loginService: LoginService, private toastr: ToastrService) {
     this.loginService.currentUser.subscribe(user => {
       this.currentUser = user;
+      if (this.currentUser) { this.shouldLogin = false; }
+    });
+    this.loginService.notLoggedIn.subscribe(() => {
+      this.notLoggedIn();
     });
   }
 
@@ -51,7 +56,8 @@ export class LoginComponent implements OnInit {
     this.loginService.logout();
   }
 
-  public showToast() {
-    this.toastr.success('toast');
+  private notLoggedIn() {
+    this.toastr.error('You must log in for this action!');
+    this.shouldLogin = true;
   }
 }

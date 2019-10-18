@@ -1,6 +1,6 @@
 <div class="row justify-content-center align-items-center">
   <!-- If user not logged in -->
-  <div class="" *ngIf="!currentUser" ngbDropdown>
+  <div class="" *ngIf="!currentUser" ngbDropdown [open]="shouldLogin">
     <button class="btn btn-secondary mx-1 shadow-none" ngbDropdownToggle>Log In</button>
     <div ngbDropdownMenu>
       <form class="px-3 py-3" [formGroup]="loginForm">
