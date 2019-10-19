@@ -1,8 +1,9 @@
 <div class="row justify-content-center align-items-center">
   <!-- If user not logged in -->
   <div class="" *ngIf="!currentUser" ngbDropdown [open]="shouldLogin">
-    <button class="btn btn-secondary mx-1 shadow-none" ngbDropdownToggle>Log In</button>
-    <div ngbDropdownMenu>
+    <button class="btn btn-secondary mx-1 shadow-none" ngbDropdownToggle (click)="isOpenForm = !isOpenForm">Log
+      In</button>
+    <div ngbDropdownMenu [@dropDown]="isOpenForm ? 'open' : 'close'">
       <form class="px-3 py-3" [formGroup]="loginForm">
         <div class="form-group">
           <label for="emailInput">Your Email:</label>
@@ -37,11 +38,11 @@
         <img src="../../../assets/default_profile.png" alt="" class="rounded-circle profileImg">
       </button>
       <button class="btn btn-secondary dropdown-toggle dropdown-toggle-split shadow-none" data-toggle="dropdown"
-        ngbDropdownToggle>
+        ngbDropdownToggle (click)="isOpenOptions = !isOpenOptions">
       </button>
     </div>
     <small class="userName">{{currentUser.userName}}</small>
-    <div class="dropdown-menu" ngbDropdownMenu>
+    <div class="dropdown-menu" ngbDropdownMenu [@dropDown]="isOpenOptions ? 'open' : 'close'">
       <button class="dropdown-item" (click)="logout()">Log out</button>
       <button class="dropdown-item" routerLink="/register">Register new account</button>
     </div>

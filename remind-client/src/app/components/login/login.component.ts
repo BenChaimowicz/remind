@@ -4,11 +4,15 @@ import { LoginService } from '../../services/login.service';
 import { User } from 'src/app/interfaces/user.interface';
 import { Login } from '../../interfaces/login.interface';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { dropDown } from 'src/app/animations';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  animations: [
+    dropDown
+  ]
 })
 export class LoginComponent implements OnInit {
 
@@ -21,6 +25,8 @@ export class LoginComponent implements OnInit {
   });
   public errorMessage: string;
   public shouldLogin = false;
+  public isOpenOptions = false;
+  public isOpenForm = false;
 
   constructor(private loginService: LoginService, private toastr: ToastrService) {
     this.loginService.currentUser.subscribe(user => {
