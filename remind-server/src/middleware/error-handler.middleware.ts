@@ -34,3 +34,9 @@ export class DatabaseError extends HttpError {
         super(500, 'Could not create database entry.');
     }
 }
+
+export class InvalidTokenError extends HttpError {
+    constructor() {
+        super(401, 'Unauthorized request.');
+    }
+}

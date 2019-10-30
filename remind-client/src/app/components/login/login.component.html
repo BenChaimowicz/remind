@@ -22,10 +22,15 @@
             <label for="rememberInput" class="form-check-label">Remember me</label>
           </div>
         </div>
-        <button class="btn btn-primary shadow-none" (click)="login()" (keydown.enter)="login()"
-          [disabled]="!loginForm.valid">
-          Log in
-        </button>
+        <div>
+          <button class="btn btn-primary shadow-none" (click)="login()" (keydown.enter)="login()"
+            [disabled]="!loginForm.valid">
+            Log in
+          </button>
+          <div>
+            <app-spinner *ngIf="showSpinner"></app-spinner>
+          </div>
+        </div>
       </form>
     </div>
     <button class="btn btn-secondary mx-1 shadow-none" routerLink="/register">Sign Up</button>
@@ -38,11 +43,12 @@
         <img src="../../../assets/default_profile.png" alt="" class="rounded-circle profileImg">
       </button>
       <button class="btn btn-secondary dropdown-toggle dropdown-toggle-split shadow-none" data-toggle="dropdown"
-        ngbDropdownToggle (click)="isOpenOptions = !isOpenOptions">
+        ngbDropdownToggle (click)="isOpenOptions = true">
       </button>
     </div>
     <small class="userName">{{currentUser.userName}}</small>
-    <div class="dropdown-menu" ngbDropdownMenu [@dropDown]="isOpenOptions ? 'open' : 'close'">
+    <div class="dropdown-menu" ngbDropdownMenu [@dropDown]="isOpenOptions ? 'open' : 'close'"
+      (openChange)="isOpenOptions = false">
       <button class="dropdown-item" (click)="logout()">Log out</button>
       <button class="dropdown-item" routerLink="/register">Register new account</button>
     </div>

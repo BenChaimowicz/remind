@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
   public shouldLogin = false;
   public isOpenOptions = false;
   public isOpenForm = false;
+  public showSpinner = false;
 
   constructor(private loginService: LoginService, private toastr: ToastrService) {
     this.loginService.currentUser.subscribe(user => {
@@ -42,13 +43,14 @@ export class LoginComponent implements OnInit {
   }
 
   public async login() {
+    this.showSpinner = true;
     this.errorMessage = undefined;
     const loginObj: Login = {
       email: this.loginForm.controls.emailInput.value,
       password: this.loginForm.controls.passwordInput.value,
       remember: this.loginForm.controls.rememberInput.value
     };
-    const login = await this.loginService.loginUser(loginObj);
+    const login = await this.loginService.loginUser(loginObj).then(() => this.showSpinner = false);
     if (typeof login === 'string') {
       this.errorMessage = login;
       this.toastr.error(this.errorMessage);
@@ -66,4 +68,6 @@ export class LoginComponent implements OnInit {
     this.toastr.error('You must log in for this action!');
     this.shouldLogin = true;
   }
+
+
 }

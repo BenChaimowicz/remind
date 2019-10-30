@@ -33,6 +33,7 @@ import { RemindStashComponent } from './components/remind-stash/remind-stash.com
 // Adapters & Middleware
 import { NgbMomentjsAdapter } from './adapters/ngb-moment.adapter';
 import { JwtInterceptor } from './middleware/jwt.interceptor';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { JwtInterceptor } from './middleware/jwt.interceptor';
     MyscoreComponent,
     RegistrationComponent,
     DragdroplistComponent,
-    RemindStashComponent
+    RemindStashComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
