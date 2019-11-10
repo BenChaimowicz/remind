@@ -40,3 +40,21 @@ export class InvalidTokenError extends HttpError {
         super(401, 'Unauthorized request.');
     }
 }
+
+export class NotFoundError extends HttpError {
+    constructor() {
+        super(404, 'The requested item was not found.');
+    }
+}
+
+export class MissingParameters extends HttpError {
+    constructor() {
+        super(400, 'Missing request parameters.');
+    }
+}
+
+export class AlreadyExistsError extends HttpError {
+    constructor() {
+        super(400, 'Item Already Exists.');
+    }
+}

@@ -1,12 +1,13 @@
 import { ConnectionOptions } from 'typeorm';
 import 'reflect-metadata';
-import {config} from 'dotenv';
+import { config } from 'dotenv';
 
 config();
 
 // Entities-Models
 import { User } from '../models/user.model';
 import { Log } from './../models/log.model';
+import { Remind } from '../models/remind.model';
 
 export const dbconfig: ConnectionOptions = {
     type: 'postgres',
@@ -17,7 +18,8 @@ export const dbconfig: ConnectionOptions = {
     database: process.env.DB_DATABASE,
     entities: [
         User,
-        Log
+        Log,
+        Remind
     ],
     synchronize: true,
 };
