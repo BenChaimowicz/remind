@@ -8,12 +8,13 @@ import { createConnection } from 'typeorm';
 import { dbconfig } from './config/dbconfig';
 import 'reflect-metadata';
 import { AuthController } from './controllers/auth.controller';
-import { config }  from 'dotenv';
+import * as dotenv from 'dotenv';
 
-config();
+dotenv.config();
 
 (async () => {
     try {
+        console.log(dbconfig);
         await createConnection(dbconfig);
     } catch (error) {
         console.error(error, 'Could not connect to database.');
@@ -23,6 +24,6 @@ config();
         new UserController(),
         new AuthController(),
     ], Number(process.env.PORT));
-    
+
     app.listen();
 })();
